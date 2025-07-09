@@ -26,6 +26,10 @@ replay_pid*
 # custom
 .cache
 compile_commands.json
+.project
+.classpath
+.settings
+target
 
 # jni c files
 *.dylib
