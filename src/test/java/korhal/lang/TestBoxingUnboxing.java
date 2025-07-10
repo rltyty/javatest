@@ -3,23 +3,26 @@ package korhal.lang;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledIf;
 
-import korhal.TestBase;
+import korhal.BaseTest;
 
-public class TestBoxingUnboxing extends TestBase {
+public class TestBoxingUnboxing extends BaseTest {
 
-  // @Test
-  // public void test_auto_boxing_performance() {
-  //   Long sum = 0L;
-  //   for (long i = 0; i <= Integer.MAX_VALUE; i++) sum += i;
-  // }
-  //
-  // @Test
-  // public void test_primitive_type_performance() {
-  //   // Use long instead of Long
-  //   long sum = 0L;
-  //   for (long i = 0; i <= Integer.MAX_VALUE; i++) sum += i;
-  // }
+  @EnabledIf("isSlowTestEnabled")
+  @Test
+  public void test_auto_boxing_performance() {
+    Long sum = 0L;
+    for (long i = 0; i <= Integer.MAX_VALUE; i++) sum += i;
+  }
+
+  @EnabledIf("isSlowTestEnabled")
+  @Test
+  public void test_primitive_type_performance() {
+    // Use long instead of Long
+    long sum = 0L;
+    for (long i = 0; i <= Integer.MAX_VALUE; i++) sum += i;
+  }
 
   @Test
   public void test_comparison() {

@@ -33,7 +33,7 @@ public class StopwatchExtension implements BeforeTestExecutionCallback,
       long ms = (duration % 1_000_000_000) / 1_000_000;
       long us = (duration % 1_000_000) / 1_000; 
       long ns = duration % 1_000; 
-      System.out.printf("Test %-35s: %4d s %3d ms %3d µs %3d ns\n",
+      System.out.printf(TestUtils.RED + "%-35s" + TestUtils.RESET + ": %4d s %3d ms %3d µs %3d ns\n",
           context.getDisplayName(), s, ms, us, ns);
     }
   }

@@ -46,7 +46,8 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${maven-surefire.version}</version>
         <configuration>
-          <useModulePath>false</useModulePath> <!-- for Java 9+ compatibility -->
+          <!-- for Java 9+ compatibility -->
+          <useModulePath>false</useModulePath> 
         </configuration>
       </plugin>
       <plugin>

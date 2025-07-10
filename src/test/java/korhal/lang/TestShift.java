@@ -8,9 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import korhal.TestBase;
+import korhal.BaseTest;
  
-public class TestShift extends TestBase {
+public class TestShift extends BaseTest {
 
   /**
    * Bitwise NOT (~): Just flip all the bits. 0 -> 1, 1 -> 0

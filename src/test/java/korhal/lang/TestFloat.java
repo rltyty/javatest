@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
 
-import korhal.TestBase;
+import korhal.BaseTest;
 
-public class TestFloat extends TestBase {
+public class TestFloat extends BaseTest {
 
   @Test
   public void test_precision() {
