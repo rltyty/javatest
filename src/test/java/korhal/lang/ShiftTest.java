@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import korhal.BaseTest;
  
-public class TestShift extends BaseTest {
+public class ShiftTest extends BaseTest {
 
   /**
    * Bitwise NOT (~): Just flip all the bits. 0 -> 1, 1 -> 0
@@ -226,7 +226,7 @@ public class TestShift extends BaseTest {
 
 
   public static void main(String[] args) {
-    TestShift ts = new TestShift();
+    ShiftTest ts = new ShiftTest();
     print_sep("Right shift:");
     print_sep("Right arithmetic shift:");
     // assert "hello".equals("hell");

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.condition.EnabledIf;
 
 import korhal.BaseTest;
 
-public class TestBoxingUnboxing extends BaseTest {
+public class BoxingUnboxingTest extends BaseTest {
 
   @EnabledIf("isSlowTestEnabled")
   @Test
