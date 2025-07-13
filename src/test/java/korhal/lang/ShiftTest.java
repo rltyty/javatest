@@ -1,9 +1,9 @@
 package korhal.lang;
 
-import static korhal.utils.TestUtils.print_dec_bin32;
-import static korhal.utils.TestUtils.print_sep;
-import static korhal.utils.TestUtils.to32BitBinaryString;
-import static korhal.utils.TestUtils.twosComplement;
+import static korhal.helper.TestUtils.print_dec_bin32;
+import static korhal.helper.TestUtils.print_sep;
+import static korhal.helper.TestUtils.to32BitBinaryString;
+import static korhal.helper.TestUtils.twosComplement;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;

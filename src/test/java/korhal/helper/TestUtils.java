@@ -1,4 +1,4 @@
-package korhal.utils;
+package korhal.helper;
 
 public class TestUtils {
 

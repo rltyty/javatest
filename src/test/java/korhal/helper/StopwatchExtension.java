@@ -1,4 +1,4 @@
-package korhal.utils;
+package korhal.helper;
 
 import org.junit.jupiter.api.extension.AfterTestExecutionCallback;
 import org.junit.jupiter.api.extension.BeforeTestExecutionCallback;
