@@ -1,0 +1,96 @@
+package korhal.misc;
+
+import java.lang.reflect.Method;
+import java.util.concurrent.Callable;
+import net.bytebuddy.ByteBuddy;
+import net.bytebuddy.asm.Advice.AllArguments;
+import net.bytebuddy.asm.Advice.Origin;
+import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
+import net.bytebuddy.implementation.MethodDelegation;
+import net.bytebuddy.implementation.bind.annotation.RuntimeType;
+import net.bytebuddy.implementation.bind.annotation.SuperCall;
+import net.bytebuddy.matcher.ElementMatchers;
+
+class YACalculator2 {
+  public long factorial(int n) {
+    if (n < 0)
+      return -1L;
+    if (n == 0)
+      return 1L;
+    long result = 1L;
+    for (int i = 2; i <= n; i++)
+      result *= i;
+    return result;
+  }
+
+  public long fibonacci_recur_stupid(int n) {
+    if (n < 0)
+      return -1L;
+    if (n <= 1)
+      return (long) n;
+    return fibonacci_recur_stupid(n - 1) + fibonacci_recur_stupid(n - 2);
+  }
+
+  public long fibonacci_iter(int n) {
+    if (n < 0)
+      return -1L;
+    if (n <= 1)
+      return (long) n;
+    long p = 1L, q = 0L, result = 0L;
+    for (int i = 2; i <= n; i++) {
+      result = p + q;
+      q = p;
+      p = result;
+    }
+    return result;
+  }
+}
+
+class StopwatchInterceptor2 {
+
+  @RuntimeType
+  public static Object intercept(
+      @Origin Method method,
+      @AllArguments Object[] args,
+      @SuperCall Callable<?> zuper)
+      throws Exception {
+
+    long start = System.currentTimeMillis();
+
+    Object result = zuper.call();
+
+    long end = System.currentTimeMillis();
+
+    System.out.printf("Time consumed: %d(ms)\n", end - start);
+    return result;
+  }
+}
+
+class ByteBuddyProxyFactory {
+  @SuppressWarnings("unchecked")
+  public static <T> T getProxy(T target) throws Exception {
+    Class <? extends T> proxy = new ByteBuddy()
+      .subclass((Class<T>) target.getClass())
+      .method(ElementMatchers.isDeclaredBy(target.getClass()))
+      .intercept(MethodDelegation.to(StopwatchInterceptor2.class))
+      .make()
+      .load(target.getClass().getClassLoader(), ClassLoadingStrategy.Default.INJECTION)
+      .getLoaded();
+    return proxy.getDeclaredConstructor().newInstance();
+  }
+}
+
+public class ByteBuddyTest {
+  static int n = 5;
+
+  // @Test // DOESN'T WORK
+  public void bytebuddy_test() throws Exception {
+    YACalculator2 cal = new YACalculator2();
+    YACalculator2 calProxy =  ByteBuddyProxyFactory.getProxy(cal);
+    System.out.printf(
+        "fibonacci_recur_stupid(%d)=%d\n",
+        CGLibTest.n, calProxy.fibonacci_recur_stupid(ByteBuddyTest.n));
+    System.out.printf(
+        "fibonacci_iter(%d)=%d\n", ByteBuddyTest.n, calProxy.fibonacci_iter(ByteBuddyTest.n));
+  }
+}

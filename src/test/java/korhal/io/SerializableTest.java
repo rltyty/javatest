@@ -8,8 +8,8 @@ import korhal.BaseTest;
 
 public class SerializableTest extends BaseTest implements Serializable {
   // `serialver -classpath target/test-classes korhal.io.SerializableTest`
-  // private static long serialVersionUID = -6543866435090341062L;
-  private static long serialVersionUID = 1L;
+  // private static final long serialVersionUID = -6543866435090341062L;
+  private static final long serialVersionUID = 1L;
 
   private String username;
   private transient String password; // 🚫 not serialized

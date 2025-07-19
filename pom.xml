@@ -16,6 +16,10 @@
     <junit-jupiter.version>5.13.3</junit-jupiter.version>
     <maven-compiler.version>3.14.0</maven-compiler.version>
     <maven-surefire.version>3.5.3</maven-surefire.version>
+    <lombok.version>1.18.38</lombok.version>
+    <cglib.version>3.3.0</cglib.version>
+    <bytebuddy.version>1.17.6</bytebuddy.version>
+    <asm.version>9.8</asm.version>
   </properties>
   <dependencies>
     <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
@@ -37,6 +41,34 @@
       <version>${junit-jupiter.version}</version>
       <scope>test</scope>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/cglib/cglib-nodep -->
+    <dependency>
+        <groupId>cglib</groupId>
+        <artifactId>cglib-nodep</artifactId>
+        <version>${cglib.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/net.bytebuddy/byte-buddy -->
+    <dependency>
+      <groupId>net.bytebuddy</groupId>
+      <artifactId>byte-buddy</artifactId>
+      <version>${bytebuddy.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.ow2.asm/asm -->
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm</artifactId>
+      <version>${asm.version}</version>
+    </dependency>
+
   </dependencies>
   <build>
     <plugins>
@@ -48,6 +80,10 @@
         <configuration>
           <!-- for Java 9+ compatibility -->
           <useModulePath>false</useModulePath> 
+          <argLine>
+            --add-opens java.base/java.lang=ALL-UNNAMED
+            --add-opens java.base/java.util=ALL-UNNAMED 
+          </argLine>
         </configuration>
       </plugin>
       <plugin>
@@ -67,6 +103,17 @@
           <testExcludes>
             <!-- <exclude>**/leetcode/templates/pXXX/*.java</exclude> -->
           </testExcludes>
+
+          <!-- https://projectlombok.org/setup/maven -->
+          <!-- for boilerplate code generation like getter/setter -->
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>${lombok.version}</version>
+            </path>
+          </annotationProcessorPaths>
+
         </configuration>
       </plugin>
     </plugins>
