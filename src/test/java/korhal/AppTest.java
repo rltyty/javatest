@@ -8,6 +8,7 @@ public class AppTest {
     @Test
     void sampleTest() {
         assertTrue(true);
+        System.out.println("Hello I'm AppTest.");
     }
 }
 

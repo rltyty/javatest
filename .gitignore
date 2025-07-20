@@ -23,14 +23,18 @@
 hs_err_pid*
 replay_pid*
 
-# custom
+# IDE meta files
 .cache
 compile_commands.json
 .project
 .classpath
 .settings
+.factorypath
 target
 
 # jni c files
 *.dylib
 *.so
+
+# macOS
+.DS_Store
