@@ -1,2 +1,2 @@
 # javatest
-About A project for learning Java.
+A Neovim-powered Java playground.
