@@ -15,6 +15,7 @@ import java.util.PriorityQueue;
 import org.junit.jupiter.api.Test;
 
 import korhal.BaseTest;
+import korhal.helper.RandomDataGen;
 
 public class CollectionTest extends BaseTest {
   @Test
@@ -39,7 +40,8 @@ public class CollectionTest extends BaseTest {
 
   @Test
   public void priority_queue_test() {
-    List<Integer> d1 = List.of(9, 3, 7, 5, 8, 1, 4, 6, 2);
+    // List<Integer> d1 = List.of(9, 3, 7, 5, 8, 1, 4, 6, 2);
+    List<Integer> d1 = RandomDataGen.getListOfInteger(1000, 0, 10^4);
     assertTrue(d1 instanceof List);
     PriorityQueue<Integer> heap = new PriorityQueue<>(Comparator.reverseOrder());
     for (Integer i : d1) {

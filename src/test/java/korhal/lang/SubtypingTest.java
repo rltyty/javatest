@@ -11,19 +11,29 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 /**
- * subtype <: supertype
- * Subtying relation (<:) of two types include:
- * 1. identity
- * 2. subclassing
- * 3. interface extension       All interfaces are subtype of Object
- * 4. interface implementation
- *
- * Use {@code supertype.isAssignableFrom(subtype) } to examine subtyping
- * relation
+ * - Subtyping (`subtype <: supertype`) is a **reflexive** and **transitive**
+ * relation on two types, include:
+ *   - identity
+ *   - subclassing
+ *   - interface extension
+ *   - interface implementation
+ * - Subtyping enables upcasting.
+ * - To examine subtyping relation of all the above cases
+ *   Use {@code supertype.isAssignableFrom(subtype) } to examine subtyping.
  */
 public class SubtypingTest {
 
-  /** A.class == B.class */
+  /**
+   * Subtyping by identity.
+   *
+   * Every type is a subtype of itself, by reflexivity of subtyping.
+   *
+   * A.class == B.class
+   *
+   * NOTE:
+   * Within a given class loader, a class (by name) has exactly one
+   * Class object at runtime.
+   */
   @Test
   public void identity_test() {
     Integer i00 = 0;
@@ -41,12 +51,11 @@ public class SubtypingTest {
     assertNotEquals(Number.class, Integer.class);
 
     // subtype check
+    assertTrue(Object.class.isAssignableFrom(Object.class));
+    assertTrue(Integer.class.isAssignableFrom(Integer.class));
     assertTrue(Number.class.isAssignableFrom(n00.getClass()));
     assertTrue(Integer.class.isAssignableFrom(n00.getClass()));
     assertTrue(Number.class.isAssignableFrom(Integer.class));
-
-    assertTrue(Integer.class.isAssignableFrom(Integer.class));
-    assertTrue(Object.class.isAssignableFrom(Object.class));
 
     /**
      * NOTE: Number is an abstract class, no instantiation.
@@ -55,10 +64,10 @@ public class SubtypingTest {
   }
 
   /**
-   * A.class == B.class.getSuperclass()
+   * Subtyping by direct and indirect class inheritance.
    *
-   * <p>classObject.getSuperclass() returns the direct super class getSuperclass() only reflects
-   * direct inheritance of class not interface
+   * Check direct class inheritance:
+   * A.class == B.class.getSuperclass()
    */
   @Test
   public void subclassing_test() {
@@ -98,6 +107,9 @@ public class SubtypingTest {
     assertTrue(AbstractList.class.isAssignableFrom(ArrayList.class));
   }
 
+  /*
+   * Check indirect class inheritance.
+   */
   private boolean isSubclass(Class<?> possibleSub, Class<?> possibleSuper) {
     if (possibleSub == null || possibleSuper == null || possibleSub == possibleSuper) return false;
     Class<?> clazz = possibleSub;
@@ -107,8 +119,11 @@ public class SubtypingTest {
     return false;
   }
 
+  /**
+   * Subtyping by interface extension
+   */
   @Test
-  public void inteface_extention_test() {
+  public void inteface_extension_test() {
     interface Intf {}
     interface IntfSub extends Intf {}
 
@@ -116,11 +131,14 @@ public class SubtypingTest {
     assertTrue(Intf.class.isAssignableFrom(IntfSub.class));
     assertFalse(IntfSub.class.isAssignableFrom(Intf.class));
 
-    // All interface types are subtypes of Object
+    // Every interface is a subtype of Object, but not a subclass of Object
     assertTrue(Object.class.isAssignableFrom(Intf.class));
     assertTrue(Object.class.isAssignableFrom(IntfSub.class));
   }
 
+  /**
+   * Subtyping by interface implementation.
+   */
   @Test
   public void interface_implementation_test() {
     interface Intf {}

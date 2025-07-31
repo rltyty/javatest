@@ -1,9 +1,11 @@
+package korhal.util.concurrent;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-public class TestThreadPoolExecutor {
+public class ThreadPoolExecutorTest {
 
     public static void main(String[] args) {
         // Create a fixed-size thread pool with 5 threads.
