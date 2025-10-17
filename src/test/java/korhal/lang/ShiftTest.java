@@ -14,7 +14,7 @@ public class ShiftTest extends BaseTest {
 
   /**
    * Bitwise NOT (~): Just flip all the bits. 0 -> 1, 1 -> 0
-   * Mathematically, ~ x = -(x + 1)
+   * Mathematically, ~ x = -(x + 1) = -x - 1
    */
   @Test
   public void test_bitwise_not() {
@@ -44,7 +44,7 @@ public class ShiftTest extends BaseTest {
    * In 32-bit 2's complement:
    * 1. All operations wrap around modulo 2³².
    * 2. x + twosComplement(x) === 0
-   * 3. twosComplement(x) == ~ x + 1
+   * 3. twosComplement(x) == ~ x + 1 = ~ (x - 1)
    *    twosComplement(x) == (x == Integer.MIN_VALUE) ? x : -x
    */
   @Test
@@ -67,6 +67,16 @@ public class ShiftTest extends BaseTest {
 
   private void unsignedLong_twosComplement(int x) {
     assertEquals(Integer.toUnsignedLong(x), (x >= 0) ? x : (1L << 32) + x);
+  }
+
+  /**
+   * Test alignment rounding.
+   * E.g. Rounding x up to the next multiple of pagesize
+   * (x + (pagesize − 1)) & ∼ (pagesize − 1)
+   */
+  @Test
+  public void test_round_up() {
+    assertEquals(8192, 5000 + ((1 << 12) - 1) & ~ ((1 << 12) - 1));
   }
 
   @Test
