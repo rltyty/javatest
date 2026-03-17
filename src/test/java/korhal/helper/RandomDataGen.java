@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.google.common.base.Strings;
-
 public class RandomDataGen {
   public static int[] getArrayOfInt(int size, int min, int maxExcl) {
     Random random = new Random();

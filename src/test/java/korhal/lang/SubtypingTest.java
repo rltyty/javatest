@@ -203,4 +203,10 @@ public class SubtypingTest {
     assert_isInstance_isAssignableFrom(ClassA.class,  c);
     assert_isInstance_isAssignableFrom(ClassB.class,  d);
   }
+
+  @Test
+  public void boxing_isAssignableFrom_test() {
+    assertFalse(Integer.class.isAssignableFrom(int.class));
+    assertFalse(int.class.isAssignableFrom(Integer.class));
+  }
 }

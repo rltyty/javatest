@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import korhal.BaseTest;
+import korhal.helper.BaseTest;
  
 public class ShiftTest extends BaseTest {
 
@@ -77,6 +77,7 @@ public class ShiftTest extends BaseTest {
   @Test
   public void test_round_up() {
     assertEquals(8192, 5000 + ((1 << 12) - 1) & ~ ((1 << 12) - 1));
+    assertEquals(8192, Math.ceilDiv(5000, 1 << 12) * (1 << 12));
   }
 
   @Test

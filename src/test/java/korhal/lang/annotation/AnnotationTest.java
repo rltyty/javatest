@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 @Retention(RetentionPolicy.RUNTIME)
 @interface MyAnnotation {
-    String name();
+  String name();
 }
 
 public class AnnotationTest {
@@ -21,7 +21,7 @@ public class AnnotationTest {
   }
 
   @Test
-  public void class_annotation_test () {
+  public void class_annotation_test() {
     MyAnnotation annotation = TestClass1.class.getAnnotation(MyAnnotation.class);
 
     assertNotNull(annotation, "Annotation not present on TestClass1");
@@ -30,11 +30,10 @@ public class AnnotationTest {
 
   @Test
   @MyAnnotation(name = "M1")
-  public void method_annotation_test () throws NoSuchMethodException {
+  public void method_annotation_test() throws NoSuchMethodException {
     Method m = AnnotationTest.class.getMethod("method_annotation_test");
     MyAnnotation annotation = m.getAnnotation(MyAnnotation.class);
     assertNotNull(annotation, "Annotation not present on method_annotation_test()");
     assertEquals("M1", annotation.name(), "Annotation name mismatch");
   }
 }
-

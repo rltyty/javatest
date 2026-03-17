@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 import org.junit.jupiter.api.Test;
 
-import korhal.BaseTest;
+import korhal.helper.BaseTest;
 
 public class DoubleFloatTest extends BaseTest {
 

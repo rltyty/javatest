@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -348,7 +347,12 @@ public class ReflectionTest {
 
     List<Integer> l000 = new ArrayList<>();
     assertTrue(l000.getClass() instanceof Class<?>);
-    assertTrue(l000.getClass() instanceof Class<? extends List>);
+    assertTrue(l000 instanceof List<?>);
+    assertTrue(l000 instanceof List<Integer>);
+    assertTrue(l000 instanceof ArrayList<Integer>);
+    // WARNING: List is a raw type. References to generic type List<E>
+    // should be parameterized [16777788]
+    // assertTrue(l000.getClass() instanceof Class<? extends List>); // ⚠️
 
   }
 }

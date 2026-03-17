@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import org.junit.jupiter.api.Test;
 
-import korhal.BaseTest;
+import korhal.helper.BaseTest;
 
 public class SerializableTest extends BaseTest implements Serializable {
   // `serialver -classpath target/test-classes korhal.io.SerializableTest`

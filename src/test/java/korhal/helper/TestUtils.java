@@ -2,11 +2,11 @@ package korhal.helper;
 
 public class TestUtils {
 
-  public static final String RESET = "\u001b[0m";
-  public static final String RED = "\u001b[31m";
-  public static final String GREEN = "\u001b[32m";
-  public static final String YELLOW = "\u001b[33m";
-  public static final String BLUE = "\u001b[34m";
+  public static final String COLOR_RESET = "\u001b[0m";
+  public static final String COLOR_RED = "\u001b[31m";
+  public static final String COLOR_GREEN = "\u001b[32m";
+  public static final String COLOR_YELLOW = "\u001b[33m";
+  public static final String COLOR_BLUE = "\u001b[34m";
 
   /**
    * Keep 2's complement of a signed integer as a signed integer.
@@ -49,6 +49,6 @@ public class TestUtils {
   public static void main(String args[]) {
     print_dec_bin32(7);
     print_dec_bin32(-7);
-    System.out.println(TestUtils.RED + "hello" + TestUtils.RESET);
+    System.out.println(TestUtils.COLOR_RED + "hello" + TestUtils.COLOR_RESET);
   }
 }

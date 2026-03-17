@@ -5,18 +5,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledIf;
 
-import korhal.BaseTest;
+import korhal.helper.BaseTest;
 
 public class BoxingUnboxingTest extends BaseTest {
 
-  @EnabledIf("isSlowTestEnabled")
+  @EnabledIf("isSlowTestsEnabled")
   @Test
   public void test_auto_boxing_performance() {
     Long sum = 0L;
     for (long i = 0; i <= Integer.MAX_VALUE; i++) sum += i;
   }
 
-  @EnabledIf("isSlowTestEnabled")
+  @EnabledIf("isSlowTestsEnabled")
   @Test
   public void test_primitive_type_performance() {
     // Use long instead of Long
