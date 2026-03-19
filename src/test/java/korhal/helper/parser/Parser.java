@@ -6,30 +6,14 @@ import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+/**
+ * getList2D → getList → getSingle → LOW_PARSERS
+ */
 public abstract class Parser {
 
   /**
-   * Function<T, R>
-   *          ↑  ↑
-   *      input  output
-   * e.g. String valueOf
-   * These are equivalent:
-   * Function<LineParser, Object> fn = LineParser::getBoolean;
-   * Function<LineParser, Object> fn = parser -> parser.getBoolean();
+   * public members
    */
-  private static final Map<Class<?>, Function<String, Object>>
-    LOW_PARSERS = Map.ofEntries(
-        Map.entry(Boolean.class,    Boolean::valueOf),
-        Map.entry(Byte.class,       Byte::valueOf),
-        Map.entry(Short.class,      Short::valueOf),
-        Map.entry(Integer.class,    Integer::valueOf),
-        Map.entry(Long.class,       Long::valueOf),
-        Map.entry(Float.class,      Float::valueOf),
-        Map.entry(Double.class,     Double::valueOf),
-        Map.entry(String.class,     Parser::stripQuotes),
-        Map.entry(Character.class,  Parser::str2Char)
-    );
-
   public static Map<DataType.Arity, BiFunction<Parser, Class<?>, Object>>
     HIGH_PARSERS = Map.of(
       DataType.Arity.SINGLE,    (parser, clazz) -> parser.getSingle(clazz),
@@ -42,40 +26,8 @@ public abstract class Parser {
   public abstract <T> List<List<T>> getList2D(Class<T> t);
 
   /**
-   * Extracts content inside outermost [ ].
-   * Throws if the input is not a properly bracket-enclosed list.
+   * protected members
    */
-  private static String stripBrackets(String s)
-      throws IllegalArgumentException {
-    String stripped = s.strip();
-    if (!stripped.startsWith("[") || !stripped.endsWith("]")) {
-      throw new IllegalArgumentException("Expected bracket-closed list, "
-        + "but got [" + stripped + "].");
-    }
-    return stripped.substring(1, stripped.length()-1).strip();
-  }
-
-  /**
-   * Splits content, e.g. "a, b, [1, 2], c" at top-level commas only.
-   */
-  private static List<String> splitElements(String s) {
-    List<String> elements = new ArrayList<>();
-    int depth = 0;
-    int start = 0;
-    for (int i = start; i < s.length(); i++) {
-      char c = s.charAt(i);
-      if        (c == '[') depth++;
-      else if   (c == ']') depth--;
-      else if   (c == ',' && depth == 0) {
-        elements.add(s.substring(start, i).strip());
-        start = i + 1;
-      }
-    }
-    String tail = s.substring(start).strip();
-    if (!tail.isBlank()) elements.add(tail);
-    return elements;
-  }
-
   protected static <E> List<List<E>> getList2D(String s, Class<E> t) {
     try {
       String content = stripBrackets(s);
@@ -133,6 +85,86 @@ public abstract class Parser {
           + t.getSimpleName() + ": " + iae.getMessage());
     }
     return obj;
+  }
+
+  /**
+   * private members
+   */
+
+  /**
+   * Function<T, R>
+   *          ↑  ↑
+   *      input  output
+   * e.g. String valueOf
+   * These are equivalent:
+   * Function<LineParser, Object> fn = LineParser::getBoolean;
+   * Function<LineParser, Object> fn = parser -> parser.getBoolean();
+   */
+  private static final Map<Class<?>, Function<String, Object>>
+    LOW_PARSERS = Map.ofEntries(
+        Map.entry(Boolean.class,    Boolean::valueOf),
+        Map.entry(Byte.class,       Byte::valueOf),
+        Map.entry(Short.class,      Short::valueOf),
+        Map.entry(Integer.class,    Integer::valueOf),
+        Map.entry(Long.class,       Long::valueOf),
+        Map.entry(Float.class,      Float::valueOf),
+        Map.entry(Double.class,     Double::valueOf),
+        Map.entry(String.class,     Parser::stripQuotes),
+        Map.entry(Character.class,  Parser::str2Char)
+    );
+
+  /**
+   * Extracts content inside outermost [ ].
+   * Throws if the input is not a properly bracket-enclosed list.
+   */
+  private static String stripBrackets(String s)
+      throws IllegalArgumentException {
+    String stripped = s.strip();
+    if (!stripped.startsWith("[") || !stripped.endsWith("]")) {
+      throw new IllegalArgumentException("Expected bracket-closed list, "
+        + "but got [" + stripped + "].");
+    }
+    return stripped.substring(1, stripped.length()-1).strip();
+  }
+
+  /**
+   * Splits content, e.g. "a, b, [1, 2], c" at top-level commas only.
+   */
+  private static List<String> splitElements(String s) {
+    List<String> elements = new ArrayList<>();
+    int depth = 0;
+    int start = 0;
+    boolean inDoubleQuotes = false;
+    boolean inSingleQuotes = false;
+    boolean escaped = false;
+    for (int i = start; i < s.length(); i++) {
+      char c = s.charAt(i);
+
+      if (escaped) {
+        escaped = false;
+        continue;
+      }
+
+      if (c == '\\' && (inDoubleQuotes || inSingleQuotes)) {
+        escaped = true;
+        continue;
+      }
+      if (c == '\'' && !inDoubleQuotes) {inSingleQuotes = !inSingleQuotes; continue;}
+      if (c == '"'  && !inSingleQuotes) {inDoubleQuotes = !inDoubleQuotes; continue;}
+
+      if (!inSingleQuotes && !inDoubleQuotes) {
+        if        (c == '[') depth++;
+        else if   (c == ']') depth--;
+        else if   (c == ',' && depth == 0) {
+          elements.add(s.substring(start, i).strip());
+          start = i + 1;
+        }
+      }
+
+    }
+    String tail = s.substring(start).strip();
+    if (!tail.isBlank()) elements.add(tail);
+    return elements;
   }
 
   private static Character str2Char(String s) {

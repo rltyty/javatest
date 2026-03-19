@@ -107,4 +107,14 @@ public class LineParserTest extends BaseTest {
   void getList2D_test_via_fileinput(Input5 c) {
     System.out.println("[" + c.I1 + "], [" + c.I2 + "]");
   }
+
+  public record  Input6(
+      @ParseWith(DataType.LIST_STRING) List<String> I1) {
+  }
+
+  @TestData(type = Input6.class, path = "LineParser6.dat", loader = LineParserLoader.class)
+  void getList_test_comma_sep(Input6 c) {
+    System.out.println(c.I1);
+  }
+
 }
