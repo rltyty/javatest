@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Stream;
 import korhal.helper.BaseTest;
 import korhal.helper.annotation.ParseWith;
-import korhal.helper.annotation.TestData;
+import korhal.helper.annotation.FileData;
 import korhal.helper.loader.LineParserLoader;
 import korhal.helper.parser.LineParser;
 import korhal.helper.parser.DataType;
@@ -72,7 +72,7 @@ public class LineParserTest extends BaseTest {
       @ParseWith(DataType.STRING) String ln3) {
   }
 
-  @TestData(type = Input2.class, path = "LineParser2.dat", loader = LineParserLoader.class)
+  @FileData(type = Input2.class, path = "LineParser2.dat", loader = LineParserLoader.class)
   void getNextValidLine_test_via_fileinput(Input2 c) {
     System.out.println("[" + c.ln1() + "], [" + c.ln2() + "], [" + c.ln3() + "]");
   }
@@ -83,7 +83,7 @@ public class LineParserTest extends BaseTest {
       @ParseWith(DataType.BOOLEAN) Boolean I3) {
   }
 
-  @TestData(type = Input3.class, path = "LineParser3.dat", loader = LineParserLoader.class)
+  @FileData(type = Input3.class, path = "LineParser3.dat", loader = LineParserLoader.class)
   void getSingle_test_via_fileinput(Input3 c) {
     System.out.println("[" + c.I1 + "], [" + c.I2 + "], [" + c.I3 + "]");
   }
@@ -93,7 +93,7 @@ public class LineParserTest extends BaseTest {
       @ParseWith(DataType.LIST_INTEGER) List<Integer> I2) {
   }
 
-  @TestData(type = Input4.class, path = "LineParser4.dat", loader = LineParserLoader.class)
+  @FileData(type = Input4.class, path = "LineParser4.dat", loader = LineParserLoader.class)
   void getList_test_via_fileinput(Input4 c) {
     System.out.println("[" + c.I1 + "], [" + c.I2 + "]");
   }
@@ -103,7 +103,7 @@ public class LineParserTest extends BaseTest {
       @ParseWith(DataType.LIST_2D_STRING) List<List<String>> I2) {
   }
 
-  @TestData(type = Input5.class, path = "LineParser5.dat", loader = LineParserLoader.class)
+  @FileData(type = Input5.class, path = "LineParser5.dat", loader = LineParserLoader.class)
   void getList2D_test_via_fileinput(Input5 c) {
     System.out.println("[" + c.I1 + "], [" + c.I2 + "]");
   }
@@ -112,7 +112,7 @@ public class LineParserTest extends BaseTest {
       @ParseWith(DataType.LIST_STRING) List<String> I1) {
   }
 
-  @TestData(type = Input6.class, path = "LineParser6.dat", loader = LineParserLoader.class)
+  @FileData(type = Input6.class, path = "LineParser6.dat", loader = LineParserLoader.class)
   void getList_test_comma_sep(Input6 c) {
     System.out.println(c.I1);
   }

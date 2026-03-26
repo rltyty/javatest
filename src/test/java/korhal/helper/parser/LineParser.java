@@ -20,6 +20,7 @@ public class LineParser extends Parser {
     return ln;
   }
 
+  @Override
   public <T> T getSingle(Class<T> t) {
     T o = null;
     try {
@@ -47,6 +48,7 @@ public class LineParser extends Parser {
     return list;
   };
 
+  @Override
   public <E> List<List<E>> getList2D(Class<E> t){
     List<List<E>> l = null;
     try {
@@ -59,6 +61,20 @@ public class LineParser extends Parser {
     }
     return l;
   };
+
+  @Override
+  public <T> T getPrimitiveArray(Class<?> primitiveType) {
+    T arr = null;
+    try {
+      String line = getNextValidLine();
+      if (line != null) {
+        arr = getPrimitiveArray(line, primitiveType);
+      }
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
+    return arr;
+  }
 
   public String getNextValidLine() throws ParseException {
     while (scanner.hasNextLine()) {

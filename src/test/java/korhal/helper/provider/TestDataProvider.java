@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.support.ParameterDeclarations;
 
-import korhal.helper.annotation.TestData;
+import korhal.helper.annotation.FileData;
 import korhal.helper.loader.TestDataLoader;
 
 public class TestDataProvider implements ArgumentsProvider {
@@ -17,8 +17,8 @@ public class TestDataProvider implements ArgumentsProvider {
   @Override
   public Stream<? extends Arguments> provideArguments(
       ParameterDeclarations parameters, ExtensionContext ctx) {
-    TestData data = ctx.getTestMethod()
-        .flatMap(m -> Optional.ofNullable(m.getAnnotation(TestData.class)))
+    FileData data = ctx.getTestMethod()
+        .flatMap(m -> Optional.ofNullable(m.getAnnotation(FileData.class)))
         .orElseThrow(() -> new IllegalArgumentException("Missing @TestData annotation"));
     Class<?> testClass = ctx.getRequiredTestClass();
     try {
@@ -29,7 +29,7 @@ public class TestDataProvider implements ArgumentsProvider {
   }
 
   @SuppressWarnings("unchecked")
-  private <T> List<T> loadData(TestData data, Class<?> testClass) throws Exception {
+  private <T> List<T> loadData(FileData data, Class<?> testClass) throws Exception {
     TestDataLoader<T> loader = (TestDataLoader<T>) data.loader()
         .getDeclaredConstructor(Class.class)
         .newInstance(data.type());

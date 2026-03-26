@@ -6,13 +6,17 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import korhal.helper.extension.InputCaptor;
+import korhal.helper.extension.TimerExtension;
+import korhal.helper.parser.TestInput;
+
 @ExtendWith(TimerExtension.class)
+@ExtendWith(InputCaptor.class)
 public abstract class BaseTest {
   // Verbose mode
   private static final boolean VERBOSE = Boolean.getBoolean("test.verbose");
   // Time consuming tests enabled
-  private static final boolean SLOW_TESTS_ENABLED =
-    Boolean.getBoolean("test.slow.tests.enabled");
+  private static final boolean SLOW_TESTS_ENABLED = Boolean.getBoolean("test.slow.tests.enabled");
 
   public static boolean isSlowTestsEnabled() {
     return SLOW_TESTS_ENABLED;
@@ -40,6 +44,11 @@ public abstract class BaseTest {
   @AfterAll
   public static void tearDownAll() {
     // System.out.println("BaseTest: Global clean work.");
+  }
+
+  // call this at the start of every test to register current input
+  protected void captureInput(TestInput input) {
+    InputCaptor.store(input.inputToString());
   }
 
 }

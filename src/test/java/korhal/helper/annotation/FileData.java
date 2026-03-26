@@ -15,7 +15,7 @@ import korhal.helper.provider.TestDataProvider;
 @Retention(RetentionPolicy.RUNTIME)
 @ParameterizedTest(name = "[{index}]")
 @ArgumentsSource(TestDataProvider.class)
-public @interface TestData {
+public @interface FileData {
   Class<?> type(); // record/class to load
   String path();   // file path
   @SuppressWarnings("rawtypes")

@@ -1,14 +1,16 @@
-package korhal.helper;
+package korhal.helper.extension;
 
 import org.junit.jupiter.api.extension.AfterTestExecutionCallback;
 import org.junit.jupiter.api.extension.BeforeTestExecutionCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
+import korhal.helper.TestUtils;
+
 public class TimerExtension implements BeforeTestExecutionCallback,
     AfterTestExecutionCallback {
 
   private static final String START_TIME = "start time";
-  private static final String TIMER_ENABLED_PROP = "timer.enabled";
+  private static final String TIMER_ENABLED_PROP = "test.timer.enabled";
   private static final Boolean TIMER_ENABLED = Boolean.getBoolean(TIMER_ENABLED_PROP);
 
   private boolean isTimerEnabled() {

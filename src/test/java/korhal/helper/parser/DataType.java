@@ -31,10 +31,20 @@ public enum DataType {
   LIST_2D_DOUBLE    (Arity.LIST_2D,   Double.class),
   LIST_2D_STRING    (Arity.LIST_2D,   String.class),
 
+  ARRAY_BOOLEAN      (Arity.ARRAY,    boolean.class),
+  ARRAY_BYTE         (Arity.ARRAY,    byte.class),
+  ARRAY_CHARACTER    (Arity.ARRAY,    char.class),
+  ARRAY_SHORT        (Arity.ARRAY,    short.class),
+  ARRAY_INTEGER      (Arity.ARRAY,    int.class),
+  ARRAY_LONG         (Arity.ARRAY,    long.class),
+  ARRAY_FLOAT        (Arity.ARRAY,    float.class),
+  ARRAY_DOUBLE       (Arity.ARRAY,    double.class),
+  ARRAY_STRING       (Arity.ARRAY,    String.class),
+
   ;
 
   public enum Arity {
-    SINGLE, LIST, LIST_2D
+    SINGLE, LIST, LIST_2D, ARRAY
   };
 
   public final Arity arity;

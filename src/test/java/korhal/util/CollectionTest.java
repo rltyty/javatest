@@ -41,7 +41,7 @@ public class CollectionTest extends BaseTest {
   @Test
   public void priority_queue_test() {
     // List<Integer> d1 = List.of(9, 3, 7, 5, 8, 1, 4, 6, 2);
-    List<Integer> d1 = RandomDataGen.getListOfInteger(1000, 0, 10^4);
+    List<Integer> d1 = RandomDataGen.getListOfInteger(1000, 0, 10 ^ 4);
     assertTrue(d1 instanceof List);
     PriorityQueue<Integer> heap = new PriorityQueue<>(Comparator.reverseOrder());
     for (Integer i : d1) {
@@ -52,11 +52,11 @@ public class CollectionTest extends BaseTest {
     Collections.sort(sortedLst, Comparator.reverseOrder());
 
     List<Integer> iterQ = new ArrayList<>(d1.size());
-    Iterator<Integer> iter = heap.iterator();     // unreliable order
+    Iterator<Integer> iter = heap.iterator(); // unreliable order
     while (iter.hasNext()) {
       iterQ.add(iter.next());
     }
-    assertNotEquals(sortedLst, iterQ);            // not pass every time
+    assertNotEquals(sortedLst, iterQ); // not pass every time
 
     PriorityQueue<Integer> heapCopy = new PriorityQueue<>(heap);
     List<Integer> prioQ = new ArrayList<>(d1.size());
@@ -64,5 +64,20 @@ public class CollectionTest extends BaseTest {
       prioQ.add(heapCopy.poll());
     }
     assertEquals(sortedLst, prioQ);
+  }
+
+  /**
+   * {@code List.of()} and {@code Collections.emptyList()} both return
+   * singleton instances cached as {@code static final} fields in their
+   * respective classes. They cannot be garbage collected because their
+   * lifetime is tied to the bootstrap classloader, which persists for
+   * the entire lifetime of the JVM instance.
+   */
+  @Test
+  public void empty_list_test() {
+    assertTrue(new ArrayList<>() != new ArrayList<>());
+    assertTrue(List.of() == List.of());
+    assertTrue(Collections.emptyList() == Collections.emptyList());
+    assertTrue(List.of() != Collections.emptyList()); // different classes
   }
 }
