@@ -38,3 +38,6 @@ target
 
 # macOS
 .DS_Store
+
+# ...except the Maven Wrapper bootstrap jar
+!.mvn/wrapper/maven-wrapper.jar
