@@ -1,0 +1,33 @@
+#0
+""
+[]
+#1
+"a"
+[-1]
+#2
+"aa"
+[-1, 0]
+#3
+"aaa"
+[-1, 0, 1]
+#4
+"ab"
+[-1, -1]
+#5 redundant, doesn't add much coverage beyond #4: "ab"
+"abb"
+[-1, -1, -1]
+#6
+"aabba"
+[-1, 0, -1, -1, 0]
+#7
+"abab"
+[-1, -1, 0, 1]
+#8
+"aaaa"
+[-1, 0, 1, 2]
+#9
+"aabaa"
+[-1, 0, -1, 0, 1]
+# #10
+# "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab"
+# [-1, 0, 1, 2, 3]

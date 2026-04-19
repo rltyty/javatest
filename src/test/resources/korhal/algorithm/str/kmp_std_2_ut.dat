@@ -1,0 +1,34 @@
+# #0 Never called with empty string
+""
+[-1]
+#1
+"a"
+[-1, 0]
+#2
+"aa"
+[-1, 0, 1]
+#3
+"aaa"
+[-1, 0, 1, 2]
+#4
+"ab"
+[-1, 0, 0]
+#5 redundant, doesn't add much coverage beyond #4: "ab"
+"abb"
+[-1, 0, 0, 0]
+#6
+"aabba"
+[-1, -1, 1, 0, -1, 1]
+#7
+"abab"
+[-1, 0, -1, 0, 2]
+#8
+"aaaa"
+[-1, -1, -1, -1, 3]
+#9
+"aabaa"
+[-1, -1, 1, -1, -1, 2]
+#10
+"ABACABADC"
+[-1,0,-1,1,-1,0,-1,3,0,0]
+

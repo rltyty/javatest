@@ -1,0 +1,72 @@
+#0 basic match at start and end
+"abcdab"
+"ab"
+[0, 4]
+
+#1 single char pattern, all match
+"aaaaa"
+"a"
+[0, 1, 2, 3, 4]
+
+#2 overlapping matches
+"aaaaa"
+"aa"
+[0, 1, 2, 3]
+
+#3 no match
+"abcdef"
+"gh"
+[]
+
+#4 pattern equals string
+"abc"
+"abc"
+[0]
+
+#5 pattern longer than string
+"ab"
+"abc"
+[]
+
+#6 single match in middle
+"abcdef"
+"cd"
+[2]
+
+#7 non-trivial overlap using KMP fallback
+"aabaabaab"
+"aab"
+[0, 3, 6]
+
+#8 pattern at end only
+"abcdef"
+"ef"
+[4]
+
+#9 full overlap pattern
+"aaaaaa"
+"aaa"
+[0, 1, 2, 3]
+
+#10 empty string s
+""
+"a"
+[]
+
+#11 single char, no match
+"a"
+"b"
+[]
+
+#12 single char, match
+"a"
+"a"
+[0]
+#13
+"ABACABADC"
+"AB"
+[0,4]
+#14
+"ABACABADC"
+"ABAD"
+[4]

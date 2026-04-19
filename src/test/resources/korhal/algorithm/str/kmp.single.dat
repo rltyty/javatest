@@ -1,0 +1,66 @@
+# Problem: String Finding (https://dmoj.ca/problem/bf4)
+
+#0 basic match at start and end
+"abcdab"
+"ab"
+0
+
+#1 single char pattern, all match
+"aaaaa"
+"a"
+0
+
+#2 overlapping matches
+"aaaaa"
+"aa"
+0
+
+#3 no match
+"abcdef"
+"gh"
+-1
+
+#4 pattern equals string
+"abc"
+"abc"
+0
+
+#5 pattern longer than string
+"ab"
+"abc"
+-1
+
+#6 single match in middle
+"abcdef"
+"cd"
+2
+
+#7 non-trivial overlap using KMP fallback
+"aabaabaab"
+"aab"
+0
+
+#8 pattern at end only
+"abcdef"
+"ef"
+4
+
+#9 full overlap pattern
+"aaaaaa"
+"aaa"
+0
+
+#10 empty string s
+""
+"a"
+-1
+
+#11 single char, no match
+"a"
+"b"
+-1
+
+#12 single char, match
+"a"
+"a"
+0

@@ -13,7 +13,7 @@ import korhal.helper.provider.TestDataProvider;
 
 @Target({ ElementType.METHOD, ElementType.ANNOTATION_TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-@ParameterizedTest(name = "[{index}]")
+@ParameterizedTest(name = "{displayName} [{index}]")
 @ArgumentsSource(TestDataProvider.class)
 public @interface FileData {
   Class<?> type(); // record/class to load
