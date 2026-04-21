@@ -110,7 +110,7 @@
           <source>${maven.compiler.source}</source>
           <target>${maven.compiler.target}</target>
           <compilerArgs>
-            <arg>-Xlint:all,-options,-path</arg>
+            <arg>-Xlint:all,-options,-path,-processing</arg>
             <arg>-parameters</arg>
               <!--
             <arg>-verbose</arg>

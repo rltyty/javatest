@@ -17,6 +17,6 @@
 |    ci      |        CI/CD pipeline changes                               |
 |    perf    |        Performance improvements                             |
 |    style   |        Formatting, whitespace — no logic change             |
-
+| build   | Changes to build system or external dependencies (Maven, Gradle, pom.xml, etc.)|
 
 
