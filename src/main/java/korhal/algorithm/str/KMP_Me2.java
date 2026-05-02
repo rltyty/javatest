@@ -32,11 +32,11 @@ public class KMP_Me2 implements KMP {
   }
 
   /**
-   * Builds the KMP failure (prefix) table for the pattern string. f[i]
-   * represents the length of the longest proper prefix of p[0..i-1] that is
-   * also a suffix, where "proper" means the prefix is strictly shorter than
-   * p[0..i-1] itself, i.e. it does not include p[i-1]. On a mismatch at index i
-   * in the pattern, we fall back to f[i].
+   * Builds the KMP failure table for the pattern string. f[i] represents the
+   * length of the longest proper prefix of p[0..i-1] that is also a suffix,
+   * where "proper" means the prefix is strictly shorter than p[0..i-1]
+   * itself, i.e. it does not include p[i-1]. On a mismatch at index i in the
+   * pattern, we fall back to f[i].
    *
    * However, we should add a mismatch constraint `p[f[i]] != p[i]` to avoid
    * redundant comparisons. t[i] will finally be returned as a "STRONG" KMP
@@ -50,14 +50,14 @@ public class KMP_Me2 implements KMP {
    * // fmt:off
    * i    0   1   2   3   4   5   6   7   8   9
    * p[i] A   B   A   C   A   B   A   D   C
+   * f[i]     0   0   1   0   1   2   3   0   0 <- Use j to denote current f[i]
    * t[i] -1  0   -1  1   -1  0   1   3   0   0
-   * len      0   0   1   0   1   2   3   0   0
    * // fmt:on
    *
    * @param p the pattern string to preprocess
    * @return failure table of length p.length() + 1, where t[0] = -1 (sentinel)
    */
-  private int[] prefix(String p) {
+  private int[] failure_tbl(String p) {
     int m = p.length();
     if (m == 0)
       return new int[] {-1};
@@ -72,10 +72,10 @@ public class KMP_Me2 implements KMP {
         t[i] = j;     // record j as fallback, then find new j
         for (; j >= 0 && p.charAt(i) != p.charAt(j); j = t[j]);
       }
-      j++;            // index to length (+1)
+      j++;            // overlap length ++
       i++;
     }
-    t[i] = j;
+    t[i] = j; // after a complete match, no failure, use overlapping length
     return t;
   }
 
