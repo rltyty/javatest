@@ -10,7 +10,7 @@ public class KMP_Me2 implements KMP {
     if (p.length() == 0 || s.length() < p.length())
       return List.of();
     List<Integer> hits = new ArrayList<>();
-    int[] prefix = prefix(p);
+    int[] prefix = failure_tbl(p);
     int i = 0, j = 0;
     while (i < s.length()) {
       if (s.charAt(i) == p.charAt(j)) {

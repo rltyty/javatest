@@ -2,7 +2,6 @@ package korhal.algorithm.str;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Timeout;
@@ -17,23 +16,23 @@ import korhal.helper.reflect.InvokePrivateHelper;
 @Timeout(value = 1, unit = TimeUnit.SECONDS)
 public class KMPTest extends BaseTest {
 
-  public record Input_Prefix(@ParseWith(DataType.STRING) String t,
+  public record Input_Failure_Tbl(@ParseWith(DataType.STRING) String t,
       @ParseWith(DataType.ARRAY_INTEGER) int[] expected) implements TestInput {
   }
 
-  @FileData(type = Input_Prefix.class, path = "kmp_std_ut.dat",
+  @FileData(type = Input_Failure_Tbl.class, path = "kmp_std_ut.dat",
       loader = LineParserLoader.class)
-  public void kmp_UT_failure_table(Input_Prefix I) {
+  public void kmp_UT_failure_table(Input_Failure_Tbl I) {
     captureInput(I);
 
     KMP alg = new KMP_Me2();
-    int[] fb = (int[]) InvokePrivateHelper.invokePrivate(alg, "prefix", I.t());
+    int[] fb = (int[]) InvokePrivateHelper.invokePrivate(alg, "failure_tbl", I.t());
     assertArrayEquals(I.expected(), fb);
   }
 
-  @FileData(type = Input_Prefix.class, path = "kmp_std_ut.dat",
+  @FileData(type = Input_Failure_Tbl.class, path = "kmp_std_ut.dat",
       loader = LineParserLoader.class)
-  public void kmp_STD_UT_prefix(Input_Prefix I) {
+  public void kmp_STD_UT_prefix(Input_Failure_Tbl I) {
     captureInput(I);
 
     KMP_Standard alg = new KMP_Standard();
