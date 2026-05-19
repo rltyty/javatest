@@ -9,8 +9,8 @@ import korhal.helper.parser.Parser;
 
 public class LineParserLoader<T> extends TestDataLoader<T> {
 
-  public LineParserLoader(Class<T> inputType) {
-    super(inputType);
+  public LineParserLoader(Class<T> scenarioType) {
+    super(scenarioType);
   }
 
   @Override

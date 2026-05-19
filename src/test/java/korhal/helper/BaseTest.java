@@ -6,12 +6,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import korhal.helper.extension.InputCaptor;
+import korhal.helper.extension.TestCaseCaptor;
 import korhal.helper.extension.TimerExtension;
-import korhal.helper.parser.TestInput;
+import korhal.helper.parser.Scenario;
 
 @ExtendWith(TimerExtension.class)
-@ExtendWith(InputCaptor.class)
+@ExtendWith(TestCaseCaptor.class)
 public abstract class BaseTest {
   // Verbose mode
   private static final boolean VERBOSE = Boolean.getBoolean("test.verbose");
@@ -46,9 +46,9 @@ public abstract class BaseTest {
     // System.out.println("BaseTest: Global clean work.");
   }
 
-  // call this at the start of every test to register current input
-  protected void captureInput(TestInput input) {
-    InputCaptor.store(input.inputToString());
+  // call this at the start of every test to register current test case
+  protected void captureTestCase(Scenario scenario) {
+    TestCaseCaptor.store(scenario.toStr());
   }
 
 }

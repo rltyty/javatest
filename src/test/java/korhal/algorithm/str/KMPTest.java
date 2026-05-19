@@ -10,90 +10,85 @@ import korhal.helper.annotation.FileData;
 import korhal.helper.annotation.ParseWith;
 import korhal.helper.loader.LineParserLoader;
 import korhal.helper.parser.DataType;
-import korhal.helper.parser.TestInput;
+import korhal.helper.parser.Scenario;
 import korhal.helper.reflect.InvokePrivateHelper;
 
 @Timeout(value = 1, unit = TimeUnit.SECONDS)
 public class KMPTest extends BaseTest {
 
-  public record Input_Failure_Tbl(@ParseWith(DataType.STRING) String t,
-      @ParseWith(DataType.ARRAY_INTEGER) int[] expected) implements TestInput {
+  public record Scenario_Failure_Tbl(
+      @ParseWith(DataType.STRING) String t,
+      @ParseWith(DataType.ARRAY_INTEGER) int[] expected
+  ) implements Scenario {
   }
 
-  @FileData(type = Input_Failure_Tbl.class, path = "kmp_std_ut.dat",
-      loader = LineParserLoader.class)
-  public void kmp_UT_failure_table(Input_Failure_Tbl I) {
-    captureInput(I);
+  @FileData(path = "kmp_std_ut.dat", loader = LineParserLoader.class)
+  public void kmp_UT_failure_table(Scenario_Failure_Tbl c) {
+    captureTestCase(c);
 
     KMP alg = new KMP_Me2();
-    int[] fb = (int[]) InvokePrivateHelper.invokePrivate(alg, "failure_tbl", I.t());
-    assertArrayEquals(I.expected(), fb);
+    int[] fb = (int[]) InvokePrivateHelper.invokePrivate(alg, "failure_tbl", c.t());
+    assertArrayEquals(c.expected(), fb);
   }
 
-  @FileData(type = Input_Failure_Tbl.class, path = "kmp_std_ut.dat",
-      loader = LineParserLoader.class)
-  public void kmp_STD_UT_prefix(Input_Failure_Tbl I) {
-    captureInput(I);
+  @FileData(path = "kmp_std_ut.dat", loader = LineParserLoader.class)
+  public void kmp_STD_UT_prefix(Scenario_Failure_Tbl c) {
+    captureTestCase(c);
 
     KMP_Standard alg = new KMP_Standard();
     int[] tbl =
-        (int[]) InvokePrivateHelper.invokePrivate(alg, "kmpTable", I.t());
-    assertArrayEquals(I.expected(), tbl);
+        (int[]) InvokePrivateHelper.invokePrivate(alg, "kmpTable", c.t());
+    assertArrayEquals(c.expected(), tbl);
   }
 
-  public record Input(@ParseWith(DataType.STRING) String s,
+  public record Scenario_KMP(@ParseWith(DataType.STRING) String s,
       @ParseWith(DataType.STRING) String t,
       @ParseWith(DataType.LIST_INTEGER) List<Integer> expected)
-      implements TestInput {
+      implements Scenario {
   }
 
-  @FileData(type = Input.class, path = "kmp.dat",
-      loader = LineParserLoader.class)
-  public void kmp_std_test(Input I) {
-    captureInput(I);
+  @FileData(path = "kmp.dat", loader = LineParserLoader.class)
+  public void kmp_std_test(Scenario_KMP c) {
+    captureTestCase(c);
     KMP alg = new KMP_Standard();
-    assertEquals(I.expected(), alg.kmp(I.s(), I.t()),
-        () -> "s=[" + I.s() + "] t=[" + I.t() + "]");
+    assertEquals(c.expected(), alg.kmp(c.s(), c.t()),
+        () -> "s=[" + c.s() + "] t=[" + c.t() + "]");
   }
 
-  @FileData(type = Input.class, path = "kmp.dat",
-      loader = LineParserLoader.class)
-  public void kmp_test_me2(Input I) {
-    captureInput(I);
+  @FileData(path = "kmp.dat", loader = LineParserLoader.class)
+  public void kmp_test_me2(Scenario_KMP c) {
+    captureTestCase(c);
     KMP alg = new KMP_Me2();
-    assertEquals(I.expected(), alg.kmp(I.s(), I.t()),
-        () -> "s=[" + I.s() + "] t=[" + I.t() + "]");
+    assertEquals(c.expected(), alg.kmp(c.s(), c.t()),
+        () -> "s=[" + c.s() + "] t=[" + c.t() + "]");
   }
 
-  public record Input_Single(@ParseWith(DataType.STRING) String s,
+  public record Scenario_KMP_Single(@ParseWith(DataType.STRING) String s,
       @ParseWith(DataType.STRING) String t,
-      @ParseWith(DataType.INTEGER) Integer expected) implements TestInput {
+      @ParseWith(DataType.INTEGER) Integer expected) implements Scenario {
   }
 
-  @FileData(type = Input_Single.class, path = "kmp.single.dat",
-      loader = LineParserLoader.class)
-  public void kmp_single_test(Input_Single I) {
+  @FileData(path = "kmp.single.dat", loader = LineParserLoader.class)
+  public void kmp_single_test(Scenario_KMP_Single c) {
     KMP_Single2 ks = new KMP_Single2();
-    assertEquals(I.expected(), ks.kmp(I.s(), I.t()));
+    assertEquals(c.expected(), ks.kmp(c.s(), c.t()));
   }
 
 
-  @FileData(type = Input.class, path = "kmp_perf.dat",
-      loader = LineParserLoader.class)
-  public void kmp_perf_test_KMP_Standard(Input I) {
-    captureInput(I);
+  @FileData(path = "kmp_perf.dat", loader = LineParserLoader.class)
+  public void kmp_perf_test_KMP_Standard(Scenario_KMP c) {
+    captureTestCase(c);
 
     KMP_Standard alg = new KMP_Standard();
-    assertEquals(I.expected(), alg.kmp(I.s(), I.t()));
+    assertEquals(c.expected(), alg.kmp(c.s(), c.t()));
   }
 
-  @FileData(type = Input.class, path = "kmp_perf.dat",
-      loader = LineParserLoader.class)
-  public void kmp_perf_test_KMP_Me2(Input I) {
-    captureInput(I);
+  @FileData(path = "kmp_perf.dat", loader = LineParserLoader.class)
+  public void kmp_perf_test_KMP_Me2(Scenario_KMP c) {
+    captureTestCase(c);
 
     KMP_Me2 alg = new KMP_Me2();
-    assertEquals(I.expected(), alg.kmp(I.s(), I.t()));
+    assertEquals(c.expected(), alg.kmp(c.s(), c.t()));
   }
 
 }

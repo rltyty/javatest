@@ -11,13 +11,14 @@ import org.junit.jupiter.params.provider.ArgumentsSource;
 import korhal.helper.loader.TestDataLoader;
 import korhal.helper.provider.TestDataProvider;
 
-@Target({ ElementType.METHOD, ElementType.ANNOTATION_TYPE })
+@Target({ElementType.METHOD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @ParameterizedTest(name = "{displayName} [{index}]")
 @ArgumentsSource(TestDataProvider.class)
 public @interface FileData {
-  Class<?> type(); // record/class to load
-  String path();   // file path
+  String path(); // file path
+
   @SuppressWarnings("rawtypes")
-  Class<? extends TestDataLoader> loader(); // annotation elements cannot be parameterized
+  Class<? extends TestDataLoader> loader(); // annotation elements cannot be
+                                            // generic type parameterized
 }

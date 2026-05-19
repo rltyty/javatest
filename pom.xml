@@ -52,6 +52,14 @@
       <scope>test</scope>
     </dependency>
 
+    <!-- My personal java test facility -->
+    <dependency>
+      <groupId>io.github.rltyty</groupId>
+      <artifactId>jtkit</artifactId>
+      <version>1.0.0</version>
+      <scope>test</scope>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
     <dependency>
         <groupId>org.projectlombok</groupId>
