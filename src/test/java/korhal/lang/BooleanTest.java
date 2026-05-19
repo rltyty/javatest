@@ -4,8 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
-
-import korhal.helper.BaseTest;
+import io.github.rltyty.jtkit.junit.helper.BaseTest;
 
 public class BooleanTest extends BaseTest {
 

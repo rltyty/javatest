@@ -4,8 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledIf;
-
-import korhal.helper.BaseTest;
+import io.github.rltyty.jtkit.junit.helper.BaseTest;
 
 public class BoxingUnboxingTest extends BaseTest {
 

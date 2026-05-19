@@ -5,8 +5,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-import org.junit.jupiter.params.provider.ValueSource;
-
 interface Combinatorics {
   long factorial(int n);
 }

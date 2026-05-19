@@ -5,13 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Timeout;
-import korhal.helper.BaseTest;
-import korhal.helper.annotation.FileData;
-import korhal.helper.annotation.ParseWith;
-import korhal.helper.loader.LineParserLoader;
-import korhal.helper.parser.DataType;
-import korhal.helper.parser.Scenario;
-import korhal.helper.reflect.InvokePrivateHelper;
+import io.github.rltyty.jtkit.junit.helper.BaseTest;
+import io.github.rltyty.jtkit.junit.helper.annotation.FileData;
+import io.github.rltyty.jtkit.junit.helper.annotation.ParseWith;
+import io.github.rltyty.jtkit.junit.helper.loader.FlatFileLoader;
+import io.github.rltyty.jtkit.junit.helper.parser.DataType;
+import io.github.rltyty.jtkit.junit.helper.parser.Scenario;
+import io.github.rltyty.jtkit.reflect.InvokePrivateHelper;
 
 @Timeout(value = 1, unit = TimeUnit.SECONDS)
 public class KMPTest extends BaseTest {
@@ -22,7 +22,7 @@ public class KMPTest extends BaseTest {
   ) implements Scenario {
   }
 
-  @FileData(path = "kmp_std_ut.dat", loader = LineParserLoader.class)
+  @FileData(path = "kmp_std_ut.dat", loader = FlatFileLoader.class)
   public void kmp_UT_failure_table(Scenario_Failure_Tbl c) {
     captureTestCase(c);
 
@@ -31,7 +31,7 @@ public class KMPTest extends BaseTest {
     assertArrayEquals(c.expected(), fb);
   }
 
-  @FileData(path = "kmp_std_ut.dat", loader = LineParserLoader.class)
+  @FileData(path = "kmp_std_ut.dat", loader = FlatFileLoader.class)
   public void kmp_STD_UT_prefix(Scenario_Failure_Tbl c) {
     captureTestCase(c);
 
@@ -47,7 +47,7 @@ public class KMPTest extends BaseTest {
       implements Scenario {
   }
 
-  @FileData(path = "kmp.dat", loader = LineParserLoader.class)
+  @FileData(path = "kmp.dat", loader = FlatFileLoader.class)
   public void kmp_std_test(Scenario_KMP c) {
     captureTestCase(c);
     KMP alg = new KMP_Standard();
@@ -55,7 +55,7 @@ public class KMPTest extends BaseTest {
         () -> "s=[" + c.s() + "] t=[" + c.t() + "]");
   }
 
-  @FileData(path = "kmp.dat", loader = LineParserLoader.class)
+  @FileData(path = "kmp.dat", loader = FlatFileLoader.class)
   public void kmp_test_me2(Scenario_KMP c) {
     captureTestCase(c);
     KMP alg = new KMP_Me2();
@@ -68,14 +68,14 @@ public class KMPTest extends BaseTest {
       @ParseWith(DataType.INTEGER) Integer expected) implements Scenario {
   }
 
-  @FileData(path = "kmp.single.dat", loader = LineParserLoader.class)
+  @FileData(path = "kmp.single.dat", loader = FlatFileLoader.class)
   public void kmp_single_test(Scenario_KMP_Single c) {
     KMP_Single2 ks = new KMP_Single2();
     assertEquals(c.expected(), ks.kmp(c.s(), c.t()));
   }
 
 
-  @FileData(path = "kmp_perf.dat", loader = LineParserLoader.class)
+  @FileData(path = "kmp_perf.dat", loader = FlatFileLoader.class)
   public void kmp_perf_test_KMP_Standard(Scenario_KMP c) {
     captureTestCase(c);
 
@@ -83,7 +83,7 @@ public class KMPTest extends BaseTest {
     assertEquals(c.expected(), alg.kmp(c.s(), c.t()));
   }
 
-  @FileData(path = "kmp_perf.dat", loader = LineParserLoader.class)
+  @FileData(path = "kmp_perf.dat", loader = FlatFileLoader.class)
   public void kmp_perf_test_KMP_Me2(Scenario_KMP c) {
     captureTestCase(c);
 

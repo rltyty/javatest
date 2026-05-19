@@ -6,8 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import java.math.BigDecimal;
 
 import org.junit.jupiter.api.Test;
-
-import korhal.helper.BaseTest;
+import io.github.rltyty.jtkit.junit.helper.BaseTest;
 
 public class DoubleFloatTest extends BaseTest {
 

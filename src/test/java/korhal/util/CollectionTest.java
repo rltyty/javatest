@@ -13,8 +13,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 import org.junit.jupiter.api.Test;
-
-import korhal.helper.BaseTest;
+import io.github.rltyty.jtkit.junit.helper.BaseTest;
 import korhal.helper.RandomDataGen;
 
 public class CollectionTest extends BaseTest {

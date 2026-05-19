@@ -1,14 +1,13 @@
 package korhal.lang;
 
-import static korhal.helper.TestUtils.print_dec_bin32;
-import static korhal.helper.TestUtils.print_sep;
-import static korhal.helper.TestUtils.to32BitBinaryString;
-import static korhal.helper.TestUtils.twosComplement;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static io.github.rltyty.jtkit.junit.helper.TestUtils.twosComplement;
+import static io.github.rltyty.jtkit.junit.helper.TestUtils.to32BitBinaryString;
+import static io.github.rltyty.jtkit.junit.helper.TestUtils.print_sep;
+import static io.github.rltyty.jtkit.junit.helper.TestUtils.print_dec_bin32;
 
 import org.junit.jupiter.api.Test;
-
-import korhal.helper.BaseTest;
+import io.github.rltyty.jtkit.junit.helper.BaseTest;
  
 public class ShiftTest extends BaseTest {
 

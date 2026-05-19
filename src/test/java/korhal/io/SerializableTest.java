@@ -3,8 +3,7 @@ package korhal.io;
 import java.io.Serializable;
 
 import org.junit.jupiter.api.Test;
-
-import korhal.helper.BaseTest;
+import io.github.rltyty.jtkit.junit.helper.BaseTest;
 
 public class SerializableTest extends BaseTest implements Serializable {
   // `serialver -classpath target/test-classes korhal.io.SerializableTest`
