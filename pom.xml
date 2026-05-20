@@ -56,7 +56,7 @@
     <dependency>
       <groupId>io.github.rltyty</groupId>
       <artifactId>jtkit</artifactId>
-      <version>1.0.0</version>
+      <version>0.6.0</version>
       <scope>test</scope>
     </dependency>
 
