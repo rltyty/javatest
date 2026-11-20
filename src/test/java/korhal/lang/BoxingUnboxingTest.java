@@ -8,14 +8,14 @@ import io.github.rltyty.jtkit.junit.helper.BaseTest;
 
 public class BoxingUnboxingTest extends BaseTest {
 
-  @EnabledIf("isSlowTestsEnabled")
+  @EnabledIf("isLongRunningTestsEnabled")
   @Test
   public void test_auto_boxing_performance() {
     Long sum = 0L;
     for (long i = 0; i <= Integer.MAX_VALUE; i++) sum += i;
   }
 
-  @EnabledIf("isSlowTestsEnabled")
+  @EnabledIf("isLongRunningTestsEnabled")
   @Test
   public void test_primitive_type_performance() {
     // Use long instead of Long
